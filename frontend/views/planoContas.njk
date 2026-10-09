@@ -1,0 +1,61 @@
+{% extends "layout.njk" %}
+{% block content %}
+<div class="app-shell" data-api-url="{{ apiUrl }}">
+   {% include "partials/header.njk" %}
+   <main class="page-content">
+         <div class="page-heading">
+            <div>
+               <h1>Plano de contas</h1>
+               <p class="muted">Categorias usadas para organizar receitas e despesas.</p>
+            </div>
+            <button id="newRecord" class="button button-primary" type="button">Nova categoria</button>
+         </div>
+         <div id="pageMessage" class="notice" role="status" hidden></div>
+         <section class="content-card">
+            <div class="card-heading">
+               <div>
+                  <h2>Categorias cadastradas</h2>
+                  <p class="muted">Os registros removidos não aparecem nesta lista.</p>
+               </div>
+               <span id="recordCount" class="count-badge">— itens</span>
+            </div>
+            <div class="table-wrap">
+               <table>
+                  <thead>
+                     <tr><th>Código</th><th>Descrição</th><th>Tipo</th><th class="align-right">Ações</th></tr>
+                  </thead>
+                  <tbody id="recordRows">
+                     <tr><td colspan="4" class="table-state">Buscando categorias do plano de contas…</td></tr>
+                  </tbody>
+               </table>
+            </div>
+         </section>
+   </main>
+</div>
+<div id="recordModal" class="modal" hidden>
+   <div class="modal-backdrop" data-close-modal></div>
+   <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Fechar">×</button>
+      <h2 id="modalTitle">Nova categoria</h2>
+      <form id="recordForm" class="form-stack">
+         <div id="formError" class="notice notice-error" role="alert" hidden></div>
+         <label for="codigo">Código</label>
+         <input id="codigo" name="codigo" maxlength="20" required placeholder="Ex.: 3.1.04">
+         <label for="descricao">Descrição</label>
+         <input id="descricao" name="descricao" maxlength="120" required placeholder="Ex.: Despesas com água">
+         <label for="tipo">Tipo</label>
+         <select id="tipo" name="tipo" required>
+            <option value="Despesa">Despesa</option>
+            <option value="Receita">Receita</option>
+         </select>
+         <div class="modal-actions">
+            <button class="button button-secondary" type="button" data-close-modal>Cancelar</button>
+            <button class="button button-primary" type="submit">Salvar categoria</button>
+         </div>
+      </form>
+   </section>
+</div>
+<script src="/js/api.js"></script>
+<script src="/js/layout.js"></script>
+<script src="/js/planoContas.js"></script>
+{% endblock %}

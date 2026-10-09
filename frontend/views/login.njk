@@ -1,0 +1,17 @@
+{% extends "layout.njk" %}
+{% block content %}
+<main class="login-shell" data-api-url="{{ apiUrl }}">
+   <section class="login-panel" aria-labelledby="loginTitle">
+      <h1 id="loginTitle">Entrar</h1>
+      <form id="loginForm" class="form-stack">
+         <div id="loginError" class="notice notice-error" role="alert" hidden></div>
+         <label for="username">Usuário</label>
+         <input id="username" name="username" autocomplete="username" required>
+         <label for="password">Senha</label>
+         <input id="password" name="password" type="password" autocomplete="current-password" required>
+         <button class="button button-primary button-wide" type="submit">Acessar</button>
+      </form>
+   </section>
+</main>
+<script src="/js/login.js"></script>
+{% endblock %}

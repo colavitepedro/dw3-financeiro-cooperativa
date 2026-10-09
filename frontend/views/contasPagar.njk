@@ -1,0 +1,77 @@
+{% extends "layout.njk" %}
+{% block content %}
+<div class="app-shell" data-api-url="{{ apiUrl }}">
+   {% include "partials/header.njk" %}
+   <main class="page-content">
+         <div class="page-heading">
+            <div>
+               <h1>Contas a pagar</h1>
+               <p class="muted">Consulte fornecedores, valores e vencimentos.</p>
+            </div>
+            <button id="newRecord" class="button button-primary" type="button">Nova conta</button>
+         </div>
+         <div id="pageMessage" class="notice" role="status" hidden></div>
+         <section class="content-card">
+            <div class="card-heading">
+               <div>
+                  <h2>Lançamentos ativos</h2>
+                  <p class="muted">Cada conta está vinculada a uma categoria.</p>
+               </div>
+               <span id="recordCount" class="count-badge">— itens</span>
+            </div>
+            <div class="table-wrap">
+               <table>
+                  <thead>
+                     <tr>
+                        <th>Descrição</th>
+                        <th>Fornecedor</th>
+                        <th>Categoria</th>
+                        <th>Vencimento</th>
+                        <th class="align-right">Valor</th>
+                        <th class="align-right">Ações</th>
+                     </tr>
+                  </thead>
+                  <tbody id="recordRows">
+                     <tr><td colspan="6" class="table-state">Buscando contas a pagar e categorias…</td></tr>
+                  </tbody>
+               </table>
+            </div>
+         </section>
+   </main>
+</div>
+<div id="recordModal" class="modal" hidden>
+   <div class="modal-backdrop" data-close-modal></div>
+   <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" type="button" data-close-modal aria-label="Fechar">×</button>
+      <h2 id="modalTitle">Nova conta</h2>
+      <form id="recordForm" class="form-stack">
+         <div id="formError" class="notice notice-error" role="alert" hidden></div>
+         <label for="descricao">Descrição</label>
+         <input id="descricao" name="descricao" maxlength="160" required placeholder="Ex.: Fatura de energia">
+         <label for="fornecedor">Fornecedor</label>
+         <input id="fornecedor" name="fornecedor" maxlength="120" required placeholder="Nome do fornecedor">
+         <div class="form-row">
+            <div>
+               <label for="valor">Valor (R$)</label>
+               <input id="valor" name="valor" type="number" min="0.01" step="0.01" required placeholder="0,00">
+            </div>
+            <div>
+               <label for="data_vencimento">Vencimento</label>
+               <input id="data_vencimento" name="data_vencimento" type="date" required>
+            </div>
+         </div>
+         <label for="plano_contas_id">Categoria</label>
+         <select id="plano_contas_id" name="plano_contas_id" required>
+            <option value="">Selecione uma categoria</option>
+         </select>
+         <div class="modal-actions">
+            <button class="button button-secondary" type="button" data-close-modal>Cancelar</button>
+            <button class="button button-primary" type="submit">Salvar conta</button>
+         </div>
+      </form>
+   </section>
+</div>
+<script src="/js/api.js"></script>
+<script src="/js/layout.js"></script>
+<script src="/js/contasPagar.js"></script>
+{% endblock %}

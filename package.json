@@ -1,0 +1,29 @@
+{
+  "name": "dw3-financeiro-cooperativa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Módulo financeiro com contas a pagar e plano de contas",
+  "main": "backend/app.js",
+  "scripts": {
+    "start": "node backend/app.js",
+    "start:api": "node backend/app.js",
+    "start:web": "node frontend/app.js",
+    "db:start": "node scripts/local-db.js start",
+    "db:stop": "node scripts/local-db.js stop",
+    "db:status": "node scripts/local-db.js status",
+    "db:init": "node backend/database/init.js",
+    "seed:admin": "node backend/database/seedAdmin.js",
+    "test": "node --test",
+    "test:integration": "node --test backend/tests/api.integration.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "nunjucks": "^3.2.4",
+    "pg": "^8.13.1"
+  }
+}
